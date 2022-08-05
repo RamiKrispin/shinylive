@@ -43,16 +43,26 @@ app_ui = ui.page_fluid(
         ui.layout_sidebar(
             ui.panel_sidebar(
                 ui.h2("Why normal distributions are normal"),
-                ui.input_select("step", "Step Type", {"float": "Float", "int": "Integer"}),
-                ui.input_slider("iteration", "Number of Iterations", 1, 1000, 500),
+                ui.input_slider("sample_size", "Sample Size", 1, 1000, 500),
                 ui.input_slider("steps", "Number of Steps", 1, 20, 16),
+                ui.input_select("step", "Step Type", {"float": "Float", "int": "Integer"}),
                 ui.input_slider("alpha", "Color Opacity", 0, 1, 0.2)
             ),
         ui.panel_main(
             ui.output_plot("plot"),
             ui.markdown(
         """
-        Text....
+        ### Why normal distributions are normal
+
+        Chapter 3 of [Statistical Rethinking's](https://xcelab.net/rm/statistical-rethinking/) by Prop. Richard McElreath focuses on normal distribution
+        and its characteristics. It illustrates how to generate a normal distribution using the soccer field experiment:
+            - Place a bunch of people at the center line of a soccer field
+            - Each person flips a coin and moves one step to the right or left according to the outcome (head or tail)
+            - Repeat this process multiple times
+        After a couple of iterations, you will notice the distribution of the people's distances across the field will become Gaussian or normal (e.g., bell-curved shape).
+
+        The app above simulates this experience by setting the sample size (i.e., number of people) and number of iterations. Where on each iteration, we draw a random number between -1 and 1 (can choose between float integer steps with the `Step Type` drop-down). The plot above shows the cumulative sum of each experiment across each step of the experience. You can notice how the distribution becomes more Gaussin as the number of steps increases.
+
         """
     ),
         )
@@ -67,7 +77,7 @@ def server(input, output, session):
         type = input.step()
         color = "lightblue"
         alpha = input.alpha()
-        sim_number = input.iteration()
+        sim_number = input.sample_size()
         steps = input.steps()
         sim_df = sim_steps(sim_number = sim_number, steps = steps, type = type)
         fig, ax = plt.subplots()
