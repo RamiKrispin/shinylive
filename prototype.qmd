@@ -1,0 +1,128 @@
+---
+title: "Shiny Live Dataviz Prototype"
+format:
+  html:
+    code-fold: true
+jupyter: python3
+---
+Prototyping the Shinylive dashboard data visualization.
+
+### Dependcies
+
+```{python}
+from numpy import random 
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
+```
+
+
+Generating random numbers - either 1 or -1 with the `random` function:
+```{python}
+r = random.randint(low = -1, high=1, size= 10, dtype=int).tolist()
+print(type(r))
+r = [1 if i == 0 else i for i in r]
+r
+```
+
+Create a function for generating random numbers by range of numbers:
+```{python}
+def random_steps(steps = 16, type = "float", low = -1, high = 1):
+    if type == "int":
+        r = random.randint(low = low, high=high, size= steps, dtype=int).tolist()
+        r = [high if i == 0 else i for i in r]
+    elif type == "float":
+        r = (high - low) * random.random_sample(size = steps) + low
+    else:
+        print("The type argument is not valid")
+        return
+    return r
+```
+
+Create a cumsum function:
+```{python}
+def cumsum(l):
+    c = []
+    t = 0
+    for i in range(0, len(l)):
+        t += l[i]
+        c.append(t)
+    return(c)
+```
+
+Create a simulation function:
+```{python}
+def sim_steps(sim_number = 10, steps = 16, type = "float"):
+    s = []
+    d = pd.DataFrame()
+    for i in range(0, sim_number):
+        v1 = [0]
+        v2 = random_steps(steps = steps, type = type)
+        if not isinstance(v2, list):
+            v2 = v2.tolist()
+        v = cumsum(v1 + v2)
+        d_temp = pd.DataFrame({"sim": i, "step": range(0, len(v)), "y": v})
+        d = pd.concat([d, d_temp])
+    return d
+```
+
+
+Test the function:
+```{python}
+sim_df = sim_steps(sim_number = 5, type = "int")
+sim_df
+```
+
+```{python}
+sim_test = sim_steps(sim_number = 5, type = "float")
+sim_test
+```
+
+```{python}
+sim_df.sim.unique()
+```
+
+```{python}
+sim_df = sim_steps(sim_number = 1000, type = "float")
+```
+
+### Plotting with Plotly:
+```{python}
+
+def plotly_sim(sim_number = 10, steps = 16, type = "float"):
+    sim_df = sim_steps(sim_number = sim_number, steps = steps, type = type)
+    p = go.Figure()
+    for i in sim_df.sim.unique():
+        df = sim_df[sim_df["sim"] == i]
+        p.add_trace(go.Scatter(x=df["step"], y=df["y"],
+                    mode='lines',
+                    name='lines',
+                    showlegend = False,
+                    line=dict(color="rgba( 143, 82, 244,0.1)" , width=1)))
+    return p.show()
+```
+
+
+```{python}
+plotly_sim(sim_number = 1000, steps = 16, type = "float")
+
+```
+
+### Plotting with matplotlib
+
+```{python}
+import matplotlib.pyplot as plt
+
+def plot_sim(sim_number = 10, steps = 16, type = "float", color = "lightblue", alpha = 0.2):
+    sim_df = sim_steps(sim_number = sim_number, steps = steps, type = type)
+    
+    for i in sim_df.sim.unique():
+        df = sim_df[sim_df["sim"] == i]
+        plt.plot(df["step"], df["y"], color = color, alpha= alpha)
+    return plt.show()
+```
+
+```{python}
+plot_sim(sim_number = 1000, steps = 16, type = "float", color = "lightblue", alpha = 0.2)
+
+```
