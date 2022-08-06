@@ -54,7 +54,7 @@ app_ui = ui.page_fluid(
         """
         ### Why normal distributions are normal
 
-        Chapter 3 of [Statistical Rethinking's](https://xcelab.net/rm/statistical-rethinking/) by Prop. Richard McElreath focuses on normal distribution
+        Chapter 3 of [Statistical Rethinking's](https://xcelab.net/rm/statistical-rethinking/) by Prof. Richard McElreath focuses on normal distribution
         and its characteristics. It illustrates how to generate a normal distribution using the soccer field experiment:
 
         - Place a bunch of people at the center line of a soccer field
