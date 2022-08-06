@@ -3,7 +3,7 @@ This repo provides an example of a [Shinylive](https://shiny.rstudio.com/py/docs
 
 ### Example
 
-Inspired by Prop. Richard McElreath's explanation about why normal distribution is normal in [Statistical Rethinking](https://xcelab.net/rm/statistical-rethinking/) chapter 3, created the following app:
+Inspired by Prof. Richard McElreath's explanation about why normal distribution is normal in [Statistical Rethinking](https://xcelab.net/rm/statistical-rethinking/) chapter 3, created the following app:
 
 <img src="images/app screenshot.png" width="100%" align="center"/></a>
 
