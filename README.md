@@ -25,8 +25,59 @@ The app above simulates this experience by setting the sample size (i.e., number
 
 ### Deploy shinylive app on Github Pages
 
-As shinylive apps are serverless, you can deploy your app into [Github Pages](https://pages.github.com/). First, create your app with the following steps:
+As shinylive apps are serverless, you can deploy your app into [Github Pages](https://pages.github.com/). First, create your app with the following step:
 ``` shell
 shiny create myapp
 ```
+
+This will create the app file - `app.py` with the default shinylive example under the `myapp` folder:
+
+``` shell
+.
+└── myapp
+    └── app.py
+```
+Next, update your app and build the site with the `shiny static` command:
+```
+shiny static myapp docs
+```
+We mapped the app folder - `myapp` to the website folder `docs` (Github Pages required the website name to set as `docs`). This will add the following folders:
+``` shell
+.
+├── docs
+│   ├── edit
+│   └── shinylive
+│       ├── jquery.terminal
+│       │   ├── bin
+│       │   ├── css
+│       │   └── js
+│       ├── pyodide
+│       │   └── fonts
+│       ├── pyright
+│       └── shiny_static
+│           └── edit
+└── myapp
+```
+
+You can test locally your app with the following command:
+``` bash
+python3 -m http.server --directory docs 8008
+```
+and open on your browser using `http://localhost:8008/`.
+
+**Note:** Any time you change your app, you will have to run `shiny static myapp docs` to update the `docs` folder.
+
+Once you finilize your app, commit and push your changes and open your repo on Github and go to the `Settings` tab and select the `Pages` option (blue boxes):
+
+<img src="images/github pages.png" width="100%" align="center"/></a>
+
+Next, select under `Build and deployment` select the `Deploy from branch` option (green box) and under the branch option your branch you want to deploy from and the `docs` folder (purple box).
+
+The site should be ready few minutes after with the following URL:
+```
+YOUR_GITHUB_USER_PROFILE.github.io/YOUR_REPO_NAME
+```
+
+The URL for the example above available here:
+https://ramikrispin.github.io/shinyelive/
 
