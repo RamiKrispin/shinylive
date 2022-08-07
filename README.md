@@ -1,4 +1,4 @@
-This repo provides an example of a [Shinylive](https://shiny.rstudio.com/py/docs/shinylive.html) app. Shinylive enables to create q serverless Shiny applications with Python. Leveraging [WebAssembly](https://webassembly.org/), it can run the Shiny app on the web browser without a server on the backend.
+This repo provides an example of a [Shinylive](https://shiny.rstudio.com/py/docs/shinylive.html) app. Shinylive enables to create a serverless Shiny applications with Python. Leveraging [WebAssembly](https://webassembly.org/), it can run the Shiny app on the web browser without a server on the backend.
 
 
 ### Example
