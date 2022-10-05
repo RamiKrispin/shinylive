@@ -1,0 +1,25 @@
+{
+    "name": "shinlive-dev",
+    "image": "docker.io/rkrispin/shinylive:dev.0.0.0.9000",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "python.defaultInterpreterPath": "/opt/conda/envs/shinylive/bin/python"
+            },
+            "extensions": [
+                "quarto.quarto",
+                "ms-azuretools.vscode-docker",
+                "ms-toolsai.jupyter",
+                "bierner.markdown-mermaid",
+                "ms-python.python",
+                "ms-vscode-remote.remote-containers",
+                "yzhang.markdown-all-in-one",
+                "redhat.vscode-yaml",
+                "purocean.drawio-preview" 
+            ]
+        }
+    },
+    "remoteEnv": {
+        "DISABLE_AUTH": "true"
+    }
+}
