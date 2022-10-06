@@ -52,4 +52,12 @@ wget --no-check-certificate https://repo.anaconda.com/miniconda/Miniconda3-lates
 
 echo "conda activate $CONDA_ENV" >> ~/.bashrc
 
-#. /root/.bashrc && conda activate $CONDA_ENV && conda info --envs && pip install package_name == package_version
+# Installing Python libraries
+. /root/.bashrc conda activate $CONDA_ENV \
+&& conda info --envs \
+&& pip install shiny \
+&& pip install pandas \
+&& pip install numpy \
+&& pip install matplotlib \
+&& pip install plotly \
+pip install statsmodels

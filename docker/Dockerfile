@@ -14,3 +14,4 @@ ENV QUARTO_VERSION=$QUARTO_VERSION
 RUN mkdir packages
 COPY install_dependencies.sh packages/
 RUN bash packages/install_dependencies.sh $QUARTO_VERSION $CONDA_ENV $PYTHON_VER
+
